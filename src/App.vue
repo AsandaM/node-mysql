@@ -1,10 +1,34 @@
 <template>
   <nav>
     <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/about">About</router-link> |
+    <router-link to="/fruits">Fruits</router-link> 
+    <div v-if = "!$cookies.get('token')">
+      |
+      <router-link to="/login">Login</router-link> |
+      <router-link to="/signup">SignUp</router-link> 
+
+    </div>
+    <div v-else>
+      <button @click="logout()">Log out</button>
+    </div>
+
   </nav>
   <router-view/>
 </template>
+
+
+<script>
+export default{
+  methods:{
+    logout(){
+      !this.$cookies.remove('token')
+      location.reload()
+
+    }
+  }
+}
+</script>
 
 <style>
 #app {
